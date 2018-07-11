@@ -13,7 +13,7 @@
                 }
 
                 canSubmit = canSubmit
-                    && document.getElementById('expire_month') != "Month"
+                    && document.getElementById('exp_month') != "Month"
                     && document.getElementById('exp_year') != "Year";
 
                 document.getElementById('registerFormSubmit').disabled = !canSubmit;
@@ -52,7 +52,7 @@
                 <option value='2021'>2021</option>
             </select>
             <br>
-            Credit Card Security Code: <input type="text" name="security_number" maxlength="4"><br>
+            Credit Card Security Code: <input type="text" name="security_number" maxlength="4" onchange="checkForm()"><br>
 
             <input type="submit" id="registerFormSubmit" value="Submit" disabled="disabled"><br>
         </form>

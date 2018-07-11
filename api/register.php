@@ -1,14 +1,8 @@
 <?php
-    $config = require('../config.php');
-    $database = $config['database'];
-    // Database configurations
-    $host = $database['host'];
-    $user = $database['user'];
-    $pass = $database['pass'];
-    $name = $database['name'];
+    require(__DIR__ . '/../crud/database.php');
 
     // Create connection
-    $conn = mysqli_connect($host, $user, $pass, $name);
+    $conn = getDatabaseConnection();
     if (!$conn) {
         echo "Failed to connect to database";
     }

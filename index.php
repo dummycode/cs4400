@@ -1,6 +1,7 @@
 <html>
     <body>
         <?php
+            require(__DIR__ . '/api/museums.php');
             // If not logged in
             if (!isset($_COOKIE['token'])) {
                 echo '
@@ -13,7 +14,15 @@
                     </form>
                     <a href="register.php">New user? Click here to register</a>';
             } else {
-                echo 'Home page';
+                echo 'Home page<br>';
+                $museums = getMuseums();
+                foreach ($museums as $museum) {
+                    echo implode(", ", $museum) . "<br>";
+                }
+                echo '
+                    <form action="manage.php">
+                        <input type="submit" value="Manage Account"/>
+                    </form>';
             }
         ?>
     </body>
