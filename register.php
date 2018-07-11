@@ -9,16 +9,33 @@
                 var expireYY = document.getElementById("expireYY").value;
                 document.getElementById("exp_year").value = expireYY;
             }
+            function checkForm()
+            {
+                var f = document.forms["registerForm"].elements;
+                var canSubmit = true;
+
+                for (var i = 0; i < f.length; i++) {
+                    if (f[i].value.length == 0) {
+                        canSubmit = false;
+                    }
+                }
+
+                canSubmit = canSubmit
+                    && document.getElementById('expire_month') != "Month"
+                    && document.getElementById('exp_year') != "Year";
+
+                document.getElementById('registerFormSubmit').disabled = !canSubmit;
+            }
         </script>
     </head>
     <body>
-        <form name="register" method="post" action="api/register.php">
-            Email: <input type="text" name="email"><br>
-            Password: <input type="password" name="password"><br>
-            Confirm Password: <input type="password"><br>
-            Credit Card Number: <input type="text" name="card_number"><br>
+        <form name="registerForm" method="post" action="api/register.php">
+            Email: <input type="text" name="email" onkeyup="checkForm()"><br>
+            Password: <input type="password" name="password" onkeyup="checkForm()"><br>
+            Confirm Password: <input type="password" onkeyup="checkForm()"><br>
+            Credit Card Number: <input type="text" name="card_number" onkeyup="checkForm()"><br>
             Credit Card Exp. Month:
-            <select name='exp_month' id='expireMM'>
+            <select name="exp_month" id="exp_month" onchange="checkForm()">
                 <option value=''>Month</option>
                 <option value='01'>01</option>
                 <option value='02'>02</option>
@@ -35,7 +52,7 @@
             </select>
             <br>
             Credit Card Exp. Year:
-            <select name='exp_year' id='expireYY'>
+            <select name="exp_year" id="exp_year" onchange="checkForm()">
                 <option value=''>Year</option>
                 <option value='2018'>2018</option>
                 <option value='2019'>2019</option>
@@ -47,7 +64,7 @@
             <!-- <input type="hidden" id="expire_month" name="expire_month" maxlength="4"/>
             <input type="hidden" id="expire_year" name="expire_year" maxlength="4"/> -->
 
-            <input type="submit" value="Submit"><br>
+            <input type="submit" id="registerFormSubmit" value="Submit" disabled="disabled"><br>
         </form>
     </body>
 </html>
