@@ -14,6 +14,8 @@
     }
 
     if (count($_POST) != 6) {
+        echo implode(", ", $_POST) . '<br>';
+        echo count($_POST) . '<br>';
         echo "Incorrect arguments";
     } else {
         $email = $_POST['email'];
