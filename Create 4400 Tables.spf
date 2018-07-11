@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>bcn_museums</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>3073721598248558489</string>
+			<key>name</key>
+			<string>backupyet</string>
+			<key>port</key>
+			<integer>3306</integer>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJX
+			TlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAF
+			gAdUdHlwZVRyb3dzXxAdU2VsZWN0aW9uRGV0YWlsVHlwZU5TSW5k
+			ZXhTZXTSFwsYGVxOU1JhbmdlQ291bnQQAIAG0hscHR5aJGNsYXNz
+			bmFtZVgkY2xhc3Nlc1pOU0luZGV4U2V0oh8gWk5TSW5kZXhTZXRY
+			TlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVk
+			QXJjaGl2ZXLRJidUZGF0YYABAAgAEQAaACMALQAyADcAQABGAE0A
+			VQBgAGcAagBsAG4AcQBzAHUAdwB8AIEAoQCmALMAtQC3ALwAxwDQ
+			ANsA3gDpAPIA9wEEAQcBGQEcASEAAAAAAAACAQAAAAAAAAAoAAAA
+			AAAAAAAAAAAAAAABIw==
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1004, 575}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>CREATE TABLE Admin (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL, 
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+
+CREATE TABLE Visitor (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL,
+	card_number CHAR(16) NOT NULL,
+	exp_month TINYINT NOT NULL,
+	exp_year SMALLINT NOT NULL,
+	security_number VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+
+CREATE TABLE Museum (
+	id INT AUTO_INCREMENT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	curator_id INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (curator_id) REFERENCES Visitor(id)
+);
+
+CREATE TABLE CuratorRequest (
+	id INT AUTO_INCREMENT NOT NULL,
+	visitor_id INT NOT NULL,
+	museum_id INT NOT NULL,
+	admin_id INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+);
+
+
+
+CREATE TABLE Review (
+	id INT AUTO_INCREMENT NOT NULL,
+	visitor_id INT NOT NULL,
+	museum_id INT NOT NULL,
+	comment TEXT,
+	rating TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+
+CREATE TABLE Ticket (
+	id INT AUTO_INCREMENT NOT NULL,
+	museum_id INT NOT NULL,
+	price DOUBLE,
+	purchase_timestamp DATETIME,
+	visitor_id INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_id, visitor_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+);
+
+CREATE TABLE Exhibit (
+	id INT AUTO_INCREMENT NOT NULL,
+	museum_id INT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	year SMALLINT NOT NULL,
+	url VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_id, name),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+
+
+
+</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>200</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>CREATE TABLE Admin (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL, 
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Visitor (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL,
+	card_number CHAR(16) NOT NULL,
+	exp_month TINYINT NOT NULL,
+	exp_year SMALLINT NOT NULL,
+	security_number VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Museum (
+	id INT AUTO_INCREMENT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	curator_id INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (curator_id) REFERENCES Visitor(id)
+);
+CREATE TABLE CuratorRequest (
+	id INT AUTO_INCREMENT NOT NULL,
+	visitor_id INT NOT NULL,
+	museum_id INT NOT NULL,
+	admin_id INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+);
+CREATE TABLE Review (
+	id INT AUTO_INCREMENT NOT NULL,
+	visitor_id INT NOT NULL,
+	museum_id INT NOT NULL,
+	comment TEXT,
+	rating TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+CREATE TABLE Ticket (
+	id INT AUTO_INCREMENT NOT NULL,
+	museum_id INT NOT NULL,
+	price DOUBLE,
+	purchase_timestamp DATETIME,
+	visitor_id INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_id, visitor_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+);
+CREATE TABLE Exhibit (
+	id INT AUTO_INCREMENT NOT NULL,
+	museum_id INT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	year SMALLINT NOT NULL,
+	url VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_id, name),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+)</string>
+		<string>CREATE TABLE Admin (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL, 
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Visitor (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL,
+	`card_number` CHAR(16) NOT NULL,
+	`exp_month` TINYINT NOT NULL,
+	`exp_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Museum (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(256) NOT NULL,
+	`curator_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (curator_id) REFERENCES Visitor(id)
+);
+CREATE TABLE CuratorRequest (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`admin_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+);
+CREATE TABLE Review (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`comment` TEXT,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+CREATE TABLE Ticket (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`price` DOUBLE,
+	`purchase_timestamp` DATETIME,
+	`visitor_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_id, visitor_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+);
+CREATE TABLE Exhibit (
+	id INT AUTO_INCREMENT NOT NULL,
+	museum_id INT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	year SMALLINT NOT NULL,
+	url VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_id, name),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+)</string>
+		<string>CREATE TABLE Admin (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL, 
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Visitor (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL,
+	`card_number` CHAR(16) NOT NULL,
+	`exp_month` TINYINT NOT NULL,
+	`exp_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Museum (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(256) NOT NULL,
+	`curator_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (curator_id) REFERENCES Visitor(id)
+);
+CREATE TABLE CuratorRequest (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`admin_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+);
+CREATE TABLE Review (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`comment` TEXT,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+CREATE TABLE Ticket (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`price` DOUBLE,
+	`purchase_timestamp` DATETIME,
+	`visitor_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_id, visitor_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+);
+CREATE TABLE Exhibit (
+	id INT AUTO_INCREMENT NOT NULL,
+	museum_id INT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	year SMALLINT NOT NULL,
+	url VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_id, exhibit_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+)</string>
+		<string>CREATE TABLE Admin (
+	id INT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(64) NOT NULL, 
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Admin (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Visitor (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	`card_number` CHAR(16) NOT NULL,
+	`exp_month` TINYINT NOT NULL,
+	`exp_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Curator (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Museum (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(256) NOT NULL,
+	`admin_id` INT NOT NULL,
+	`curator_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id),
+	FOREIGN KEY (curator_id) REFERENCES Curator(id)
+);
+CREATE TABLE CuratorRequest (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`admin_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+);
+CREATE TABLE Review (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`comment` TEXT NOT NULL,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+CREATE TABLE Ticket (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`price` DOUBLE NOT NULL,
+	`purchase_timestamp` DATE NOT NULL,
+	`visitor_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_id, visitor_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+);
+CREATE TABLE Exhibit (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`curator_id` INT NOT NULL,
+	`exhibit_id` INT NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_id, curator_id, exhibit_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Admin (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Visitor (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	`card_number` CHAR(16) NOT NULL,
+	`expiration_month` TINYINT NOT NULL,
+	`expiration_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Curator (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Museum (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(256) NOT NULL,
+	`admin_id` INT NOT NULL,
+	`curator_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id),
+	FOREIGN KEY (curator_id) REFERENCES Curator(id)
+);
+CREATE TABLE CuratorRequest (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`admin_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+);
+CREATE TABLE Review (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`comment` TEXT NOT NULL,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_id, museum_id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+);
+CREATE TABLE Ticket (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`price` DOUBLE NOT NULL,
+	`purchase_timestamp` DATE NOT NULL,
+	`visitor_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_id, visitor_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+);
+CREATE TABLE Exhibit (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`curator_id` INT NOT NULL,
+	`exhibit_id` INT NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_id, curator_id, exhibit_id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Admin (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Visitor (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	`card_number` CHAR(16) NOT NULL,
+	`expiration_month` TINYINT NOT NULL,
+	`expiration_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Curator (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (user_id),
+	FOREIGN KEY (user_id) REFERENCES User(id)
+);
+CREATE TABLE Museum (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(256) NOT NULL,
+	`admin_id` INT NOT NULL,
+	`curator_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id),
+	FOREIGN KEY (curator_id) REFERENCES Curator(id)
+);
+CREATE TABLE CuratorRequest (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_id` INT NOT NULL,
+	`museum_id` INT NOT NULL,
+	`admin_id` INT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (museum_id) REFERENCES Museum(id),
+	FOREIGN KEY (admin_id) REFERENCES Admin(id)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255),
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+);
+CREATE TABLE Admin (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255),
+	PRIMARY KEY (id),
+	UNIQUE KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Visitor (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255),
+	`card_number` CHAR(16) NOT NULL,
+	`expiration_month` TINYINT NOT NULL,
+	`expiration_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Curator (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255),
+	PRIMARY KEY (id),
+	UNIQUE KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Museum (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email),
+	FOREIGN KEY (curator_email) REFERENCES Curator(email)
+);
+CREATE TABLE CuratorRequest (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email)
+);
+CREATE TABLE Review (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`comment` TEXT NOT NULL,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+);
+CREATE TABLE Ticket (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_name` VARCHAR(256),
+	`price` DOUBLE NOT NULL,
+	`purchase_timestamp` DATE NOT NULL,
+	`visitor_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY(museum_name, visitor_email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email)
+);
+CREATE TABLE Exhibit (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	`exhibit_name` VARCHAR(256) NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (museum_name, curator_email, exhibit_name),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255),
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (email)
+)</string>
+		<string>CREATE TABLE User (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`email` VARCHAR(255),
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (email)
+)</string>
+		<string>CREATE TABLE User (
+	`email` VARCHAR(255),
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (email)
+);
+CREATE TABLE Admin (
+	`email` VARCHAR(255),
+	PRIMARY KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Visitor (
+	`email` VARCHAR(255),
+	`card_number` CHAR(16) NOT NULL,
+	`expiration_month` TINYINT NOT NULL,
+	`expiration_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Curator (
+	`email` VARCHAR(255),
+	PRIMARY KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Museum (
+	`name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email),
+	FOREIGN KEY (curator_email) REFERENCES Curator(email)
+);
+CREATE TABLE CuratorRequest (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email)
+);
+CREATE TABLE Review (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`comment` TEXT NOT NULL,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+);
+CREATE TABLE Ticket (
+	`museum_name` VARCHAR(256),
+	`price` DOUBLE NOT NULL,
+	`purchase_timestamp` DATE NOT NULL,
+	`visitor_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(museum_name, visitor_email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email)
+);
+CREATE TABLE Exhibit (
+	`museum_name` VARCHAR(256) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	`exhibit_name` VARCHAR(256) NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	PRIMARY KEY (museum_name, curator_email, exhibit_name),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+)</string>
+		<string>CREATE TABLE User (
+	`email` VARCHAR(255),
+	`password` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (email)
+);
+CREATE TABLE Admin (
+	`email` VARCHAR(255),
+	PRIMARY KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Visitor (
+	`email` VARCHAR(255),
+	`card_number` CHAR(16) NOT NULL,
+	`expiration_month` TINYINT NOT NULL,
+	`expiration_year` SMALLINT NOT NULL,
+	`security_number` VARCHAR(4) NOT NULL,
+	PRIMARY KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Curator (
+	`email` VARCHAR(255),
+	PRIMARY KEY (email),
+	FOREIGN KEY (email) REFERENCES User(email)
+);
+CREATE TABLE Museum (
+	`name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email),
+	FOREIGN KEY (curator_email) REFERENCES Curator(email)
+);
+CREATE TABLE CuratorRequest (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email)
+);
+CREATE TABLE Review (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`comment` TEXT NOT NULL,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+);
+CREATE TABLE Ticket (
+	`museum_name` VARCHAR(256),
+	`price` DOUBLE NOT NULL,
+	`purchase_timestamp` DATE NOT NULL,
+	`visitor_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(museum_name, visitor_email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email)
+);
+CREATE TABLE Exhibit (
+	`museum_name` VARCHAR(256) NOT NULL,
+	`exhibit_name` VARCHAR(256) NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (museum_name, exhibit_name),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+)</string>
+		<string>CREATE TABLE Exhibit (
+	`museum_name` VARCHAR(256) NOT NULL,
+	`exhibit_name` VARCHAR(256) NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (museum_name, exhibit_name),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+)</string>
+		<string>CREATE TABLE Exhibit (
+	`museum_name` VARCHAR(256) NOT NULL,
+	`exhibit_name` VARCHAR(256) NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR(256) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (museum_name, exhibit_name),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+)</string>
+		<string>CREATE TABLE CuratorRequest (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email)
+)</string>
+		<string>CREATE TABLE CuratorRequest (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email)
+);
+CREATE TABLE Review (
+	`visitor_email` VARCHAR(255) NOT NULL,
+	`museum_name` VARCHAR(256) NOT NULL,
+	`comment` TEXT NOT NULL,
+	`rating` TINYINT NOT NULL,
+	PRIMARY KEY (visitor_email, museum_name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name)
+);
+CREATE TABLE Ticket (
+	`museum_name` VARCHAR(256),
+	`price` DOUBLE NOT NULL,
+	`purchase_timestamp` DATE NOT NULL,
+	`visitor_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(museum_name, visitor_email),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+	FOREIGN KEY (visitor_email) REFERENCES Visitor(email)
+);
+CREATE TABLE Exhibit (
+	`museum_name` VARCHAR(256) NOT NULL,
+	`exhibit_name` VARCHAR(256) NOT NULL,
+	`year` SMALLINT NOT NULL,
+	`url` VARCHAR NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (museum_name, exhibit_name),
+	FOREIGN KEY (museum_name) REFERENCES Museum(name),
+)</string>
+		<string>CREATE TABLE Museum (
+	`name` VARCHAR(256) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email),
+	FOREIGN KEY (curator_email) REFERENCES Curator(email)
+)</string>
+		<string>CREATE TABLE Museum (
+	`name` VARCHAR(MAXVALUE) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email),
+	FOREIGN KEY (curator_email) REFERENCES Curator(email)
+)</string>
+		<string>CREATE TABLE Museum (
+	`name` VARCHAR(max) NOT NULL,
+	`admin_email` VARCHAR(255) NOT NULL,
+	`curator_email` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (name),
+	FOREIGN KEY (admin_email) REFERENCES Admin(email),
+	FOREIGN KEY (curator_email) REFERENCES Curator(email)
+)</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.7.14</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
