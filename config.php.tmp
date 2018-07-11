@@ -2,8 +2,8 @@
     return [
         'database' => [
             'host' => '127.0.0.1',
-            'name' => 'username',
-            'user' => 'root',
+            'name' => 'database',
+            'user' => 'username',
             'pass' => 'password',
         ],
     ];
