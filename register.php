@@ -57,7 +57,7 @@
             <input type="submit" id="registerFormSubmit" value="Submit" disabled="disabled"><br>
         </form>
         <form action="index.php">
-            <input type="submit" value="Back" />
+            <input type="submit" value="Back"/>
         </form>
     </body>
 </html>
