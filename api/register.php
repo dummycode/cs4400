@@ -1,5 +1,5 @@
 <?php
-    require(__DIR__ . '/../crud/database.php');
+    require_once(__DIR__ . '/../crud/database.php');
 
     // Create connection
     $conn = getDatabaseConnection();
