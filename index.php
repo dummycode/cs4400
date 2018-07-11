@@ -10,7 +10,8 @@
                             Password: <input type="password" name="password"><br>
                             <input type="submit" name="submit" value="Submit"><br>
                         </div>
-                    </form>';
+                    </form>
+                    <a href="register.php">New user? Click here to register</a>';
             } else {
                 echo 'Home page';
             }
