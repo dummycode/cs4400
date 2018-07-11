@@ -1,6 +1,7 @@
 <html>
     <body>
         <?php
+            // If not logged in
             if (!isset($_COOKIE['token'])) {
                 echo '
                     <form name="login" method="post" action="api/login.php">

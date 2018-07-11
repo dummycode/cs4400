@@ -1,14 +1,6 @@
 <html>
     <head>
         <script>
-            function monthChange() {
-                var exipreMM = document.getElementById("exipreMM").value;
-                document.getElementById("exp_month").value = expireMM;
-            }
-            function yearChange() {
-                var expireYY = document.getElementById("expireYY").value;
-                document.getElementById("exp_year").value = expireYY;
-            }
             function checkForm()
             {
                 var f = document.forms["registerForm"].elements;
@@ -61,8 +53,6 @@
             </select>
             <br>
             Credit Card Security Code: <input type="text" name="security_number" maxlength="4"><br>
-            <!-- <input type="hidden" id="expire_month" name="expire_month" maxlength="4"/>
-            <input type="hidden" id="expire_year" name="expire_year" maxlength="4"/> -->
 
             <input type="submit" id="registerFormSubmit" value="Submit" disabled="disabled"><br>
         </form>
