@@ -3,7 +3,7 @@
         <?php
             require_once(__DIR__ . '/api/museums.php');
             require_once(__DIR__ . '/crud/user.php');
-            requre_once(__DIR__ . '/gui/museums.php');
+            require_once(__DIR__ . '/gui/museums.php');
             // If not logged in
             if (!isset($_COOKIE['token'])) {
                 echo '
@@ -19,6 +19,7 @@
                 echo '<h3>Home page</h3>';
                 echo '<p>Welcome, <i>' . getUser($_COOKIE['token'])['email'] . '</i>!</p>';
                 displayMuseums();
+
                 echo '
                     <form action="manage.php">
                         <input type="submit" value="Manage Account"/>
