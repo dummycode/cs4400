@@ -3,7 +3,6 @@
 
     function getMuseums() {
         $conn = getDatabaseConnection();
-        echo "test";
         if (!$conn) {
             echo "Error connecting to database<br>";
         } else {
