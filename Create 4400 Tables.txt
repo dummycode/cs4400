@@ -21,10 +21,10 @@ CREATE TABLE Visitor (
 CREATE TABLE Museum (
 	id INT AUTO_INCREMENT NOT NULL,
 	name VARCHAR(256) NOT NULL,
-	curator_id INT NOT NULL,
+	curator_id INT,
 	PRIMARY KEY (id),
 	UNIQUE KEY (name),
-	FOREIGN KEY (curator_id) REFERENCES Visitor(id)
+	FOREIGN KEY (curator_id) REFERENCES Visitor(id) ON DELETE SET NULL
 );
 
 CREATE TABLE CuratorRequest (
@@ -34,7 +34,7 @@ CREATE TABLE CuratorRequest (
 	admin_id INT NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE KEY (visitor_id, museum_id),
-	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id) ON DELETE CASCADE,
 	FOREIGN KEY (museum_id) REFERENCES Museum(id),
 	FOREIGN KEY (admin_id) REFERENCES Admin(id)
 );
@@ -49,7 +49,7 @@ CREATE TABLE Review (
 	rating TINYINT NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE KEY (visitor_id, museum_id),
-	FOREIGN KEY (visitor_id) REFERENCES Visitor(id),
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id) ON DELETE CASCADE,
 	FOREIGN KEY (museum_id) REFERENCES Museum(id)
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE Ticket (
 	PRIMARY KEY (id),
 	UNIQUE KEY(museum_id, visitor_id),
 	FOREIGN KEY (museum_id) REFERENCES Museum(id),
-	FOREIGN KEY (visitor_id) REFERENCES Visitor(id)
+	FOREIGN KEY (visitor_id) REFERENCES Visitor(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Exhibit (

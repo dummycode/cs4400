@@ -41,7 +41,7 @@
         } else {
             $sql = "SELECT *
                     FROM Ticket
-                    WHERE museum_id ='" . $museum_id . "';";
+                    WHERE museum_id ='" . $museum_id . "' AND visitor_id='" . myUserId() . "';";
 
             $result = mysqli_query($conn, $sql);
 
@@ -52,8 +52,8 @@
                 } else {
                     // Buy a ticket
                     $sql = "
-                        INSERT INTO Ticket(museum_id, visitor_id)
-                        VALUES(" . $museum_id . ", " . myUserId() . ");
+                        INSERT INTO Ticket(museum_id, visitor_id, purchase_timestamp)
+                        VALUES(" . $museum_id . ", " . myUserId() . ", NOW());
                     ";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {

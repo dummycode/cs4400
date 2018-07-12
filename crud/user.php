@@ -1,5 +1,16 @@
 <?php
     require_once(__DIR__ . '/database.php');
+
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'logout':
+                logout();
+                break;
+            default:
+                break;
+        }
+    }
+
     function getUser(int $id) {
         $conn = getDatabaseConnection();
         if (!$conn) {
