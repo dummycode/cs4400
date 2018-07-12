@@ -17,12 +17,12 @@
                 echo '<h3>Welcome, <i>' . getUser($_COOKIE['token'])['email'] . '</i>!</h3>';
 
                 echo '
-                    <form action="gui/museums.php">
+                    <form action="museums.php">
                         <input type="submit" value="View All Museums"/>
                     </form>';
 
                 echo '
-                    <form action="gui/tickets.php">
+                    <form action="tickets.php">
                         <input type="submit" value="My Tickets"/>
                     </form>';
 
