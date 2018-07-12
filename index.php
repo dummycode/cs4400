@@ -1,9 +1,7 @@
 <html>
     <body>
         <?php
-            require_once(__DIR__ . '/api/museums.php');
             require_once(__DIR__ . '/crud/user.php');
-            require_once(__DIR__ . '/gui/museums.php');
             // If not logged in
             if (!isset($_COOKIE['token'])) {
                 echo '
@@ -16,9 +14,22 @@
                     </form>
                     <a href="register.php">New user? Click here to register</a>';
             } else {
-                echo '<h3>Home page</h3>';
-                echo '<p>Welcome, <i>' . getUser($_COOKIE['token'])['email'] . '</i>!</p>';
-                displayMuseums();
+                echo '<h3>Welcome, <i>' . getUser($_COOKIE['token'])['email'] . '</i>!</h3>';
+
+                echo '
+                    <form action="museums.php">
+                        <input type="submit" value="View All Museums"/>
+                    </form>';
+
+                echo '
+                    <form action="tickets.php">
+                        <input type="submit" value="My Tickets"/>
+                    </form>';
+
+                echo '
+                    <form action="reviews.php">
+                        <input type="submit" value="My Reviews"/>
+                    </form>';
 
                 echo '
                     <form action="manage.php">
