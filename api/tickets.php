@@ -2,6 +2,16 @@
     require_once(__DIR__ . '/../crud/database.php');
     require_once(__DIR__ . '/../crud/user.php');
 
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'purchase':
+                purchaseTicket($_POST['id']);
+                break;
+            default:
+                break;
+        }
+    }
+
     function getMyTickets(int $id) {
         $conn = getDatabaseConnection();
         if (!$conn) {
@@ -43,8 +53,14 @@
                     // Buy a ticket
                     $sql = "
                         INSERT INTO Ticket(museum_id, visitor_id)
-                        VALUES(" . $museum_id . ", " . getLoggedUserId() . ");
+                        VALUES(" . $museum_id . ", " . myUserId() . ");
                     ";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result) {
+                        echo "Bought a ticket";
+                    } else {
+                        echo "Failed query<br>" . mysqli_error($conn);
+                    }
                 }
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
