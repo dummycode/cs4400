@@ -27,6 +27,11 @@
                     </form>';
 
                 echo '
+                    <form action="reviews.php">
+                        <input type="submit" value="My Reviews"/>
+                    </form>';
+
+                echo '
                     <form action="manage.php">
                         <input type="submit" value="Manage Account"/>
                     </form>';
