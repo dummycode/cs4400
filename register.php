@@ -16,6 +16,8 @@
                     && document.getElementById('exp_month') != "Month"
                     && document.getElementById('exp_year') != "Year";
 
+                canSubmit = canSubmit && (document.getElementById('pass').value == document.getElementById('pass2').value);
+
                 document.getElementById('registerFormSubmit').disabled = !canSubmit;
             }
         </script>
@@ -23,8 +25,8 @@
     <body>
         <form name="registerForm" method="post" action="api/register.php">
             Email: <input type="text" name="email" onkeyup="checkForm()"><br>
-            Password: <input type="password" name="password" onkeyup="checkForm()"><br>
-            Confirm Password: <input type="password" onkeyup="checkForm()"><br>
+            Password: <input type="password" id="pass" name="password" onkeyup="checkForm()"><br>
+            Confirm Password: <input type="password" id="pass2" onkeyup="checkForm()"><br>
             Credit Card Number: <input type="text" name="card_number" onkeyup="checkForm()"><br>
             Credit Card Exp. Month:
             <select name="exp_month" id="exp_month" onchange="checkForm()">
