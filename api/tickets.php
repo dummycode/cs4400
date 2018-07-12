@@ -1,20 +1,22 @@
 <?php
     require_once(__DIR__ . '/../crud/database.php');
 
-    function getMuseums() {
+    function getMyTickets(int $id) {
         $conn = getDatabaseConnection();
         if (!$conn) {
             echo "Error connecting to database<br>";
         } else {
-            $sql = "SELECT * FROM Museum";
+            $sql = "SELECT *
+                    FROM Ticket
+                    WHERE visitor_id ='" . $id . "';";
 
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                $museums = [];
-                while($museum = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    $museums[] = $museum;
+                $tickets = [];
+                while($ticket = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    $tickets[] = $ticket;
                 }
-                return $museums;
+                return $tickets;
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
             }
