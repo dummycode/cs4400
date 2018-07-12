@@ -11,4 +11,12 @@
             return mysqli_fetch_array($result, MYSQLI_ASSOC);
         }
     }
+
+    function myUserId() {
+        return $_COOKIE['token'] ?? null;
+    }
+
+    function amLoggedIn() {
+        return isset($_COOKIE['token']);
+    }
 ?>

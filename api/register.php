@@ -1,5 +1,6 @@
 <?php
     require_once(__DIR__ . '/../crud/database.php');
+    require_once(__DIR__ . '/login.php');
 
     // Create connection
     $conn = getDatabaseConnection();
@@ -33,9 +34,7 @@
         ";
 
         if (mysqli_query($conn, $sql)) {
-            echo "Good";
-            setcookie('token', 'test', time() + (30), "/");
-            header("Location: ../index.php");
+            authenticate($email, $password);
             die();
         } else {
             echo "Failed query<br>" . mysqli_error($conn);
