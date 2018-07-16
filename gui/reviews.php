@@ -1,7 +1,22 @@
 <?php
-    function displayMyReviews(int $id) {
-        require_once(__DIR__ . '/../api/reviews.php');
-        $reviews = getMyReviews($id);
+    require_once(__DIR__ . '/../api/reviews.php');
+    require_once(__DIR__ . '/../crud/user.php');
+
+    function displayMyReviews() {
+        $reviews = getReviews(myUserId(), 0);
+
+        echo "<h1>My Reviews</h1>";
+        displayReviews($reviews);
+    }
+
+    function displayAllReviews(int $museum_id) {
+        $reviews = getReviews(0, $museum_id);
+
+        echo "<h1>All Reviews</h1>";
+        displayReviews($reviews);
+    }
+
+    function displayReviews($reviews) {
         echo "<table border='1'>";
         echo "
             <tr>

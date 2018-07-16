@@ -13,14 +13,18 @@
         }
     }
 
-    function getMyReviews(int $id) {
+    function getReviews(int $user_id, int $museum_id) {
         $conn = getDatabaseConnection();
         if (!$conn) {
             echo "Error connecting to database<br>";
         } else {
+            $where = "1=1"
+                . ($user_id ? " AND visitor_id='" . $user_id . "'" : "")
+                . ($museum_id ? " AND museum_id='" . $museum_id . "'" : "");
+
             $sql = "SELECT *
                     FROM Review
-                    WHERE visitor_id='" . $id . "';";
+                    WHERE " . $where;
 
             $result = mysqli_query($conn, $sql);
             if ($result) {
@@ -35,7 +39,6 @@
         }
     }
 
-// TODO
     function createReview(int $id, $rating, $comment) {
         $conn = getDatabaseConnection();
         if (!$conn) {

@@ -10,7 +10,8 @@
             echo reviewForm($museum['id']);
 
             echo '
-                <form action="index.php">
+                <form action="museum.php">
+                    <input type="hidden" name="id" value="' . $museum['id'] . '">
                     <input type="submit" value="Back"/>
                 </form>
             ';
