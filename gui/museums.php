@@ -2,6 +2,10 @@
     function displayAllMuseums() {
         require_once(__DIR__ . '/../api/museums.php');
         $museums = getMuseums();
+        displayMuseums($museums);
+    }
+
+    function displayMuseums($museums) {
         echo "<table border='1'>";
         echo "
         <tr>
@@ -40,5 +44,11 @@
             </tr>";
         }
         echo "</table>";
+    }
+
+    function displayMuseumsCurating(int $id) {
+        require_once(__DIR__ . '/../api/museums.php');
+        $museums = getMuseumsCurating($id);
+        displayMuseums($museums);
     }
 ?>
