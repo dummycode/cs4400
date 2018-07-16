@@ -5,8 +5,9 @@
             require_once(__DIR__ . '/api/tickets.php');
 
             $museum_id = $_GET['id'];
+            $curator = $_GET['curator'] ?? false;
 
-            displayMuseum($museum_id);
+            displayMuseum($museum_id, $curator);
 
             echo '
                 <form method="post" action="api/tickets.php">
