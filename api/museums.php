@@ -26,17 +26,21 @@
     }
 
     function getNameFromId(int $id) {
+        return fetchMuseum($id)['name'];
+    }
+
+    function fetchMuseum(int $id) {
         $conn = getDatabaseConnection();
         if (!$conn) {
             echo "Error connecting to database<br>";
         } else {
             $sql = "
-                SELECT Name FROM Museum WHERE id='" . $id . "';
+                SELECT * FROM Museum WHERE id='" . $id . "';
             ";
 
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                return mysqli_fetch_array($result)['Name'];
+                return mysqli_fetch_array($result);
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
             }

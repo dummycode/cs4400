@@ -1,5 +1,17 @@
 <?php
     require_once(__DIR__ . '/../crud/database.php');
+    require_once(__DIR__ . '/../crud/user.php');
+    require_once(__DIR__ . '/tickets.php');
+
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'create':
+                createReview($_POST['id'], $_POST['rating'], $_POST['comment']);
+                break;
+            default:
+                break;
+        }
+    }
 
     function getMyReviews(int $id) {
         $conn = getDatabaseConnection();
@@ -19,6 +31,45 @@
                 return $reviews;
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
+            }
+        }
+    }
+
+// TODO
+    function createReview(int $id, $rating, $comment) {
+        $conn = getDatabaseConnection();
+        if (!$conn) {
+            echo "Error connecting to database<br>";
+        } else {
+            // Check if they have a ticket for this museum
+            if (!haveTicketForMuseum($id)) {
+                echo "You have not bought a ticket for this museum";
+            } else {
+                $sql = "SELECT *
+                        FROM Review
+                        WHERE museum_id ='" . $id . "' AND visitor_id='" . myUserId() . "';";
+
+                $result = mysqli_query($conn, $sql);
+
+                if ($result) {
+                    // Already have a ticket
+                    if (mysqli_num_rows($result) > 0) {
+                        echo "You already have written a review for this museum";
+                    } else {
+                        // Save the review
+                        $sql = "
+                            INSERT INTO Review(museum_id, visitor_id, comment, rating)
+                            VALUES(" . $id . ", " . myUserId() . ", '" . $comment . "', " . $rating . ");";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            echo "Wrote a review";
+                        } else {
+                            echo "Failed query<br>" . mysqli_error($conn);
+                        }
+                    }
+                } else {
+                    echo "Failed query<br>" . mysqli_error($conn);
+                }
             }
         }
     }
