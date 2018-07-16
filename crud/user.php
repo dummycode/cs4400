@@ -30,4 +30,11 @@
     function amLoggedIn() {
         return isset($_COOKIE['token']);
     }
+
+    /**
+     * Middleware for actions that require authentication
+     */
+    function isAuthenticated() {
+        return true;
+    }
 ?>

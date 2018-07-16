@@ -1,4 +1,7 @@
 <html>
+    <head>
+        <?php require_once(__DIR__ . '/gui/style.php'); ?>
+    </head>
     <body>
         <?php
             require_once(__DIR__ . '/crud/user.php');
