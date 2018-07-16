@@ -1,5 +1,6 @@
 <?php
     require_once(__DIR__ . '/../api/reviews.php');
+    require_once(__DIR__ . '/../api/museums.php');
     require_once(__DIR__ . '/../crud/user.php');
 
     function displayMyReviews() {
@@ -11,8 +12,9 @@
 
     function displayAllReviews(int $museum_id) {
         $reviews = getReviews(0, $museum_id);
+        $museum = fetchMuseum($museum_id);
 
-        echo "<h1>All Reviews</h1>";
+        echo "<h1>All Reviews for " . $museum['name'] . "</h1>";
         displayReviews($reviews);
     }
 
