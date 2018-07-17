@@ -24,10 +24,26 @@
                 echo '<h3>Welcome, Sir/Madame</h3>';
 
                 echo '
+                    <form action="curator.php">
+                        <input type="submit" value="Accept Curator Requests"/>
+                    </form>
+                ';
+                echo '
+                    <form action="museum.php">
+                        <input type="submit" value="Add Museum"/>
+                    </form>
+                ';
+                echo '
+                    <form action="museum.php">
+                        <input type="submit" value="Delete Museum"/>
+                    </form>
+                ';
+                echo '
                     <form method="post" action="../api/users.php">
                         <input type="hidden" name="action" value="logout">
                         <input type="submit" value="Logout"/>
-                    </form>';
+                    </form>
+                ';
             }
         ?>
     </body>
