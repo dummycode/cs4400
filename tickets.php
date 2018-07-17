@@ -1,6 +1,6 @@
 <html>
     <body>
-        <h1>My Tickets</h1>
+        <h2>My Tickets</h2>
         <?php
             require_once(__DIR__ . '/gui/tickets.php');
             require_once(__DIR__ . '/crud/user.php');

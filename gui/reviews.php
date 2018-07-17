@@ -6,7 +6,7 @@
     function displayMyReviews() {
         $reviews = getReviews(myUserId(), 0);
 
-        echo "<h1>My Reviews</h1>";
+        echo "<h2>My Reviews</h2>";
         displayReviews($reviews);
     }
 
@@ -14,7 +14,7 @@
         $reviews = getReviews(0, $museum_id);
         $museum = fetchMuseum($museum_id);
 
-        echo "<h1>All Reviews for " . $museum['name'] . "</h1>";
+        echo "<h2>All Reviews for " . $museum['name'] . "</h2>";
         displayReviews($reviews);
     }
 

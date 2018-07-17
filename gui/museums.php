@@ -37,7 +37,7 @@
         require_once(__DIR__ . '/../api/museums.php');
         require_once(__DIR__ . '/../api/exhibits.php');
 
-        echo "<h1>" . getNameFromId($id) . "<?</h1>";
+        echo "<h2>" . getNameFromId($id) . "<?</h2>";
 
         $exhibits = getExhibitsForMuseum($id);
         echo "<table border='1'>";
@@ -66,15 +66,39 @@
         echo "</table>";
     }
 
-    function newMuseumForm(int $museum_id) {
+    function newMuseumForm() {
         return <<<HTML
-            <form action="api/museums.php" method="post">
-                <input type="text" name="name"><br>
-
+            <form action="../api/museums.php" method="post">
+                Name: <input type="text" name="name"><br>
                 <input type="hidden" name="action" value="create">
-                <input type="hidden" name="museum_id" value="$museum_id"/>
-
                 <input type="submit" value="Submit Museum">
+            </form>
+            <form action="index.php">
+                <input type="submit" value="Back"/>
+            </form>
+HTML;
+    }
+
+    function deleteMuseumForm() {
+        require_once(__DIR__ . '/../api/museums.php');
+
+        $museums = getMuseums();
+
+        $options = "<option value=''>Museums</option>";
+        foreach ($museums as $museum) {
+            $options .= "<option value='" . $museum['id'] . "'>" . $museum['name'] . "</option>";
+        }
+
+        return <<<HTML
+            <form action="../api/museums.php" method="post">
+                <select name="id">
+                    $options
+                </select><br>
+                <input type="hidden" name="action" value="delete">
+                <input type="submit" value="Delete Museum">
+            </form>
+            <form action="index.php">
+                <input type="submit" value="Back"/>
             </form>
 HTML;
     }

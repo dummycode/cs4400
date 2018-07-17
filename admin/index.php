@@ -21,20 +21,22 @@
             } else {
                 $userId = myUserId();
 
-                echo '<h3>Welcome, Sir/Madame</h3>';
+                echo '<h2>Welcome, Sir/Madame</h2>';
 
                 echo '
-                    <form action="curator.php">
+                    <form action="requests.php">
                         <input type="submit" value="Accept Curator Requests"/>
                     </form>
                 ';
                 echo '
                     <form action="museum.php">
+                        <input type="hidden" name="action" value="add">
                         <input type="submit" value="Add Museum"/>
                     </form>
                 ';
                 echo '
                     <form action="museum.php">
+                        <input type="hidden" name="action" value="delete">
                         <input type="submit" value="Delete Museum"/>
                     </form>
                 ';

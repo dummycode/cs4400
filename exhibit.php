@@ -7,7 +7,7 @@
 
             $museum = fetchMuseum($_GET['museum_id']);
 
-            echo '<h1>New exhibit for ' . $museum['name'] . '</h1>';
+            echo '<h2>New exhibit for ' . $museum['name'] . '</h2>';
 
             echo newExhibitForm($museum['id']);
 

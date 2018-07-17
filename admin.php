@@ -22,7 +22,7 @@
                 $userId = myUserId();
                 $museumsCurating = getMuseumsCurating($userId);
 
-                echo '<h3>Welcome, Sir/Madame</h3>';
+                echo '<h2>Welcome, Sir/Madame</h2>';
 
                 echo '
                     <form action="requests.php">

@@ -7,10 +7,10 @@
             $curator = $_GET['curator'] ?? 0;
 
             if ($curator) {
-                echo '<h1>My Museums</h1>';
+                echo '<h2>My Museums</h2>';
                 displayMuseumsCurating(myUserId());
             } else {
-                echo '<h1>All Museums</h1>';
+                echo '<h2>All Museums</h2>';
                 displayAllMuseums();
             }
         ?>

@@ -24,7 +24,7 @@
                 $userId = myUserId();
                 $museumsCurating = getMuseumsCurating($userId);
 
-                echo '<h3>Welcome, <i>' . getUser($userId)['email'] . '</i>!</h3>';
+                echo '<h2>Welcome, <i>' . getUser($userId)['email'] . '</i>!</h2>';
 
                 echo museumSelectinForm();
 

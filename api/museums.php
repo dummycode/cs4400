@@ -4,7 +4,10 @@
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'create':
-                createMuseum($_POST['name']);
+                newMuseum($_POST['name']);
+                break;
+            case 'delete':
+                deleteMuseum($_POST['id']);
                 break;
             default:
                 break;
@@ -106,7 +109,7 @@
                     // Save the museum
                     $sql = "
                         INSERT INTO Museum(name)
-                        VALUES(" . $name . ");";
+                        VALUES('" . $name . "');";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         echo "Museum created";
@@ -117,6 +120,22 @@
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
             }
+        }
+    }
+
+    function deleteMuseum($museum_id) {
+        // Create connection
+        $conn = getDatabaseConnection();
+        if (!$conn) {
+            echo "Failed to connect to database";
+        }
+
+        $sql = "DELETE FROM Museum WHERE id='" . $museum_id . "';";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "Museum deleted";
+        } else {
+            echo "Failed query<br>" . mysqli_error($conn);
         }
     }
 ?>

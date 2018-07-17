@@ -6,7 +6,7 @@
 
             $museum = fetchMuseum($_GET['id']);
 
-            echo '<h1>Writing review for ' . $museum['name'] . '</h1>';
+            echo '<h2>Writing review for ' . $museum['name'] . '</h2>';
             echo reviewForm($museum['id']);
 
             echo '
