@@ -89,6 +89,28 @@
         }
     }
 
+    function isAdmin($email, $password) {
+        // Create connection
+        $conn = getDatabaseConnection();
+        if (!$conn) {
+            echo "Failed to connect to database";
+            die();
+        }
+
+        $sql = "
+            SELECT * FROM Admin
+            WHERE email='" . $email . "' AND password='" . $password . "';
+        ";
+
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            return $result;
+        } else {
+            echo "Failed query<br>" . mysqli_error($conn);
+            die();
+        }
+    }
+
     function logout() {
         setcookie('token', '', time() - 3600, "/");
         header("Location: ../index.php");

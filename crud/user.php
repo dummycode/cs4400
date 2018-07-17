@@ -41,7 +41,7 @@
     /**
      * Middleware for determining whether a user is an admin or not
      */
-    function isAdmin() {
-        return true;
+    function amAdmin() {
+        return false;
     }
 ?>
