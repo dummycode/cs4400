@@ -11,6 +11,7 @@
         }
     }
 
+// TODO no duplicate requests
     function newRequest(int $user_id, int $museum_id) {
         $conn = getDatabaseConnection();
         if (!$conn) {

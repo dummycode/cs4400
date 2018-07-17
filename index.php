@@ -46,6 +46,7 @@
                 if ($museumsCurating) {
                     echo '
                         <form action="museums.php">
+                            <input type="hidden" name="curator" value="true">
                             <input type="submit" value="My Museums"/>
                         </form>
                     ';

@@ -33,6 +33,7 @@
         echo "</table>";
     }
 
+// TODO fix museum id display
     function displayMuseum(int $id, $curator = false) {
         require_once(__DIR__ . '/../api/museums.php');
         require_once(__DIR__ . '/../api/exhibits.php');
@@ -78,7 +79,8 @@
             </form>
 HTML;
     }
-
+    
+// TODO disable delete button until dropdown has been changed
     function deleteMuseumForm() {
         require_once(__DIR__ . '/../api/museums.php');
 
