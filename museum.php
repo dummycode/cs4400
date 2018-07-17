@@ -4,11 +4,14 @@
             require_once(__DIR__ . '/gui/museums.php');
             require_once(__DIR__ . '/api/tickets.php');
             require_once(__DIR__ . '/crud/user.php');
+            require_once(__DIR__ . '/api/museums.php');
 
             $museum_id = $_GET['id'];
-            $curator = $_GET['curator'] ?? false;
 
-            displayMuseum($museum_id, $curator);
+            $museums = getMuseumsCurating(myUserId());
+            $isCurator = array_filter($museums, "isCurator");
+
+            displayMuseum($museum_id, $isCurator);
 
             echo '
                 <form method="post" action="api/tickets.php">
@@ -28,10 +31,7 @@
                 </form>
             ';
 
-            $museums = getMuseumsCurating(myUserId());
-            $museums = array_filter($museums, "isCurator");
-
-            if ($museums) {
+            if ($isCurator) {
                 echo '
                     <form action="exhibit.php">
                         <input type="hidden" name="museum_id" value="' . $museum_id . '"/>

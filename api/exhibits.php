@@ -51,7 +51,7 @@
         $sql = "DELETE FROM Exhibit WHERE id='" . $exhibit_id . "';";
 
         if (mysqli_query($conn, $sql)) {
-            header("Location: ../museum.php?id=" . $museum_id . "&curator=1");
+            header("Location: ../museum.php?id=" . $museum_id);
         } else {
             echo "Failed query<br>" . mysqli_error($conn);
         }

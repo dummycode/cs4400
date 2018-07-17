@@ -24,7 +24,7 @@
             $exhibit_count = $museum['exhibit_count'] ?? 0;
             echo "
                 <tr>
-                    <td><a href=\"./museum.php?id=" . $museum['id'] . "&curator=" . $curator . "\">" . $museum['name'] . "</a></td>
+                    <td><a href=\"./museum.php?id=" . $museum['id'] . "\">" . $museum['name'] . "</a></td>
                     " . ($curator ? "<td>" . $exhibit_count . "</td>" : "") . "
                     <td>" . $rating . "/5</td>
                 </tr>
