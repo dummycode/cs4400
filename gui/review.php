@@ -1,7 +1,7 @@
 <?php
     function reviewForm(int $id) {
         return <<<HTML
-            <form action="api/reviews.php" method="POST">
+            <form action="api/reviews.php" method="post">
                 <select name="rating">
                     <option value='1'>1</option>
                     <option value='2'>2</option>

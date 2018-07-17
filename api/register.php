@@ -20,6 +20,8 @@
         $exp_year = $_POST['exp_year'];
         $security_number = $_POST['security_number'];
 
+        // TODO CHECK DUPLICATES
+
         $sql = "
             INSERT INTO Visitor (id, email, password, card_number, exp_month, exp_year, security_number)
             VALUES (

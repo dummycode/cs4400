@@ -6,7 +6,6 @@
         <?php
             require_once(__DIR__ . '/crud/user.php');
             require_once(__DIR__ . '/api/museums.php');
-            require_once(__DIR__ . '/gui/museums.php');
 
             // If not logged in
             if (!amLoggedIn()) {
@@ -23,37 +22,27 @@
                 $userId = myUserId();
                 $museumsCurating = getMuseumsCurating($userId);
 
-                echo '<h3>Welcome, <i>' . getUser($userId)['email'] . '</i>!</h3>';
-
-                echo museumSelectinForm();
+                echo '<h3>Welcome, Sir/Madame</h3>';
 
                 echo '
-                    <form action="museums.php">
-                        <input type="submit" value="View All Museums"/>
+                    <form action="requests.php">
+                        <input type="submit" value="Accept Curator Requests"/>
                     </form>';
 
                 echo '
-                    <form action="tickets.php">
-                        <input type="submit" value="My Tickets"/>
+                    <form action="museum.php">
+                        <input type="submit" value="Add Museum"/>
                     </form>';
 
                 echo '
-                    <form action="reviews.php">
-                        <input type="submit" value="My Reviews"/>
+                    <form action="museum.php">
+                        <input type="submit" value="Delete Museum"/>
                     </form>';
 
-                if ($museumsCurating) {
-                    echo '
-                        <form action="museums.php">
-                            <input type="hidden" name="curator" value="true"/>
-                            <input type="submit" value="My Museums"/>
-                        </form>
-                    ';
-                }
-
                 echo '
-                    <form action="manage.php">
-                        <input type="submit" value="Manage Account"/>
+                    <form method="post" action="api/users.php">
+                        <input type="hidden" name="action" value="logout">
+                        <input type="submit" value="Logout"/>
                     </form>';
             }
         ?>

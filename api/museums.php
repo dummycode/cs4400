@@ -1,6 +1,15 @@
 <?php
     require_once(__DIR__ . '/../crud/database.php');
 
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'create':
+                createMuseum($_POST['name']);
+                break;
+            default:
+                break;
+        }
+    }
 
     function getMuseums() {
         $conn = getDatabaseConnection();
@@ -8,7 +17,7 @@
             echo "Error connecting to database<br>";
         } else {
             $sql = "
-                SELECT Museum.id, Museum.name, AVG(Rating) as avg_rating
+                SELECT Museum.id, Museum.name, Museum.curator_id, AVG(Rating) as avg_rating
                 FROM (Museum LEFT OUTER JOIN Review on Museum.id = Review.museum_id)
                 GROUP BY Museum.id;
             ";
@@ -74,6 +83,39 @@
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
                 return [];
+            }
+        }
+    }
+
+    function newMuseum($name) {
+        $conn = getDatabaseConnection();
+        if (!$conn) {
+            echo "Error connecting to database<br>";
+        } else {
+            $sql = "SELECT *
+                    FROM Museum
+                    WHERE name ='" . $name . "';";
+
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+                // Duplicate museum?
+                if (mysqli_num_rows($result) > 0) {
+                    echo "There already exists a museum with this name";
+                } else {
+                    // Save the museum
+                    $sql = "
+                        INSERT INTO Museum(name)
+                        VALUES(" . $name . ");";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result) {
+                        echo "Museum created";
+                    } else {
+                        echo "Failed query<br>" . mysqli_error($conn);
+                    }
+                }
+            } else {
+                echo "Failed query<br>" . mysqli_error($conn);
             }
         }
     }

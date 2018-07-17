@@ -65,4 +65,37 @@
         }
         echo "</table>";
     }
+
+    function newMuseumForm(int $museum_id) {
+        return <<<HTML
+            <form action="api/museums.php" method="post">
+                <input type="text" name="name"><br>
+
+                <input type="hidden" name="action" value="create">
+                <input type="hidden" name="museum_id" value="$museum_id"/>
+
+                <input type="submit" value="Submit Museum">
+            </form>
+HTML;
+    }
+
+    function museumSelectinForm() {
+        require_once(__DIR__ . '/../api/museums.php');
+
+        $museums = getMuseums();
+
+        $options = "<option value=''>Museums</option>";
+        foreach ($museums as $museum) {
+            $options .= "<option value='" . $museum['id'] . "'>" . $museum['name'] . "</option>";
+        }
+
+        return <<<HTML
+            <form action="museum.php" method="get">
+                <select name="id" onchange="submit()">
+                    $options
+                </select><br>
+                <input type="hidden" name="action" value="get">
+            </form>
+HTML;
+    }
 ?>

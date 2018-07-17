@@ -37,4 +37,11 @@
     function isAuthenticated() {
         return true;
     }
+
+    /**
+     * Middleware for determining whether a user is an admin or not
+     */
+    function isAdmin() {
+        return true;
+    }
 ?>

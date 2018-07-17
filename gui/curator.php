@@ -13,7 +13,7 @@
         $id = myUserId();
 
         return <<<HTML
-            <form action="api/curator.php" method="POST">
+            <form action="api/curator.php" method="post">
                 <select name="museum_id">
                     $options
                 </select><br>
