@@ -23,7 +23,7 @@
         </script>
     </head>
     <body>
-        <form name="registerForm" method="post" action="api/register.php">
+        <form name="registerForm" method="post" action="api/users.php">
             Email: <input type="text" name="email" onkeyup="checkForm()"><br>
             Password: <input type="password" id="pass" name="password" onkeyup="checkForm()"><br>
             Confirm Password: <input type="password" id="pass2" onkeyup="checkForm()"><br>
@@ -56,6 +56,7 @@
             <br>
             Credit Card Security Code: <input type="text" name="security_number" maxlength="4" onkeyup="checkForm()"><br>
 
+            <input type="hidden" name="action" value="create">
             <input type="submit" id="registerFormSubmit" value="Submit" disabled="disabled"><br>
         </form>
         <form action="index.php">
