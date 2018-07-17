@@ -15,6 +15,7 @@
                         <div class="message"><?php if(isset($message) && $message != "") { echo $message; } ?></div>
                             Email: <input type="text" name="email"><br>
                             Password: <input type="password" name="password"><br>
+                            <input type="hidden" name="action" value="auth">
                             <input type="submit" name="submit" value="Submit"><br>
                         </div>
                     </form>
