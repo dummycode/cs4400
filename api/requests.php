@@ -22,7 +22,7 @@
             $sql = "
                 SELECT CuratorRequest.id, email, name, museum_id, visitor_id
                 FROM ((CuratorRequest LEFT JOIN Visitor ON Visitor.id = CuratorRequest.visitor_id)
-                    LEFT JOIN Museum on Museum.id = CuratorRequest.museum_id);
+                    LEFT JOIN Museum ON Museum.id = CuratorRequest.museum_id);
             ";
 
             $result = mysqli_query($conn, $sql);

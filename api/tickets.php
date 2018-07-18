@@ -17,8 +17,8 @@
         if (!$conn) {
             echo "Error connecting to database<br>";
         } else {
-            $sql = "SELECT *
-                    FROM Ticket
+            $sql = "SELECT Museum.name, purchase_timestamp, price, museum_id
+                    FROM (Ticket LEFT JOIN Museum ON Museum.id = Ticket.museum_id)
                     WHERE visitor_id ='" . $id . "';";
 
             $result = mysqli_query($conn, $sql);

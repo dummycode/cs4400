@@ -14,7 +14,7 @@
         foreach($tickets as $ticket) {
             echo "
                 <tr>
-                    <td>" . $ticket['museum_id'] . "</td>
+                    <td><a href=\"./museum.php?id=" . $ticket['museum_id'] . "\">" . $ticket['name'] . "</a></td>
                     <td>" . $ticket['purchase_timestamp'] . "</td>
                     <td>" . ($ticket['price'] ?? 'Free') . "</td>
                 </tr>
