@@ -1,6 +1,5 @@
 <?php
     require_once(__DIR__ . '/../crud/database.php');
-
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'request':
@@ -17,7 +16,7 @@
             echo "Error connecting to database<br>";
         } else {
             $sql = "SELECT *
-                    FROM museum
+                    FROM Museum
                     WHERE curator_id='" . $user_id . "' AND id='" . $museum_id . "';";
 
             $result = mysqli_query($conn, $sql);
@@ -36,7 +35,7 @@
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
-                        // Duplicate museum?
+                        // Duplicate request?
                         if (mysqli_num_rows($result) > 0) {
                             session_start();
                             $_SESSION['message'] = 'You have already requested to curate this museum';
@@ -60,6 +59,8 @@
                         echo "Failed query<br>" . mysqli_error($conn);
                     }
                 }
+            } else {
+                echo "Failed query<br>" . mysqli_error($conn);
             }
         }
     }
