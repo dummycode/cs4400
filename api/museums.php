@@ -104,7 +104,9 @@
             if ($result) {
                 // Duplicate museum?
                 if (mysqli_num_rows($result) > 0) {
-                    echo "There already exists a museum with this name";
+                    session_start();
+                    $_SESSION['message'] = 'There already exists a museum with this name';
+                    header('Location: ../admin/museum.php?action=add');
                 } else {
                     // Save the museum
                     $sql = "
@@ -112,7 +114,10 @@
                         VALUES('" . $name . "');";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
-                        echo "Museum created";
+
+                        session_start();
+                        $_SESSION['message'] = 'Museum created';
+                        header('Location: ../admin/museum.php?action=add');
                     } else {
                         echo "Failed query<br>" . mysqli_error($conn);
                     }
@@ -133,7 +138,9 @@
         $sql = "DELETE FROM Museum WHERE id='" . $museum_id . "';";
 
         if (mysqli_query($conn, $sql)) {
-            echo "Museum deleted";
+            session_start();
+            $_SESSION['message'] = 'Museum deleted';
+            header('Location: ../admin/museum.php?action=delete');
         } else {
             echo "Failed query<br>" . mysqli_error($conn);
         }

@@ -71,7 +71,9 @@
             if ($result) {
                 // Duplicate exhibit
                 if (mysqli_num_rows($result) > 0) {
-                    echo "There already exists a exhibit with this name for this museum";
+                    session_start();
+                    $_SESSION['message'] = 'There already exists a exhibit with this name for this museum';
+                    header('Location: ../exhibit.php?museum_id=' . $museum_id);
                 } else {
                     // Save the exhibit
                     $sql = "
@@ -79,7 +81,9 @@
                         VALUES('" . $name . "', '" . $year . "', '" . $url . "', '" . $museum_id . "');";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
-                        echo "Exhibit created";
+                        session_start();
+                        $_SESSION['message'] = 'Exhibit created';
+                        header('Location: ../museum.php?id=' . $museum_id);
                     } else {
                         echo "Failed query<br>" . mysqli_error($conn);
                     }

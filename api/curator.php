@@ -25,7 +25,9 @@
             if ($result) {
                 // Already curating?
                 if (mysqli_num_rows($result) > 0) {
-                    echo "You are already curating this museum<br>";
+                    session_start();
+                    $_SESSION['message'] = 'You are already curating this museum';
+                    header('Location: ../request.php');
                 } else {
                     $sql = "SELECT *
                             FROM CuratorRequest
@@ -36,7 +38,9 @@
                     if ($result) {
                         // Duplicate museum?
                         if (mysqli_num_rows($result) > 0) {
-                            echo "You have already requested to curate this museum<br>";
+                            session_start();
+                            $_SESSION['message'] = 'You have already requested to curate this museum';
+                            header('Location: ../request.php');
                         } else {
                             // Create a request
                             $sql = "
@@ -45,7 +49,9 @@
                             ";
                             $result = mysqli_query($conn, $sql);
                             if ($result) {
-                                echo "Curator status requested";
+                                session_start();
+                                $_SESSION['message'] = 'Curator request made';
+                                header('Location: ../request.php');
                             } else {
                                 echo "Failed query<br>" . mysqli_error($conn);
                             }

@@ -47,12 +47,16 @@
                 ";
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
-                    echo "Bought a ticket";
+                    session_start();
+                    $_SESSION['message'] = 'Bought a ticket';
+                    header('Location: ../tickets.php');
                 } else {
                     echo "Failed query<br>" . mysqli_error($conn);
                 }
             } else {
-                echo "You have already purchased a ticket for this museum";
+                session_start();
+                $_SESSION['message'] = 'You have already bought a ticket for this museum';
+                header('Location: ../museum.php?id=' . $museum_id);
             }
         }
     }

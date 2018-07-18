@@ -41,7 +41,9 @@
                 $userId = mysqli_fetch_array($adminResult, MYSQLI_ASSOC)["id"];
                 $location = '../admin/index.php';
             } else {
-                echo "Invalid credentials<br>";
+                session_start();
+                $_SESSION['message'] = 'Invalid credentials';
+                header('Location: ../index.php');
                 die();
             }
 
