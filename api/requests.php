@@ -47,7 +47,6 @@
 
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                echo "Approved request<br>";
                 removeRequest($id);
             } else {
                 echo "Failed query<br>" . mysqli_error($conn);
@@ -65,8 +64,9 @@
         $sql = "DELETE FROM CuratorRequest WHERE id='" . $id . "';";
 
         if (mysqli_query($conn, $sql)) {
-            echo "Removed request<br>";
-            header("Location: ../admin/requests.php");
+            session_start();
+            $_SESSION['message'] = 'Updated request';
+            header('Location: ../admin/requests.php');
         } else {
             echo "Failed query<br>" . mysqli_error($conn);
         }
