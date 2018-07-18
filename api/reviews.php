@@ -46,7 +46,9 @@
         } else {
             // Check if they have a ticket for this museum
             if (!haveTicketForMuseum($id)) {
-                echo "You have not bought a ticket for this museum";
+                session_start();
+                $_SESSION['message'] = 'You do not have a ticket for this museum';
+                header('Location: ../museum.php?id=' . $id);
             } else {
                 $sql = "SELECT *
                         FROM Review
@@ -55,9 +57,11 @@
                 $result = mysqli_query($conn, $sql);
 
                 if ($result) {
-                    // Already have a ticket
+                    // Already have a review
                     if (mysqli_num_rows($result) > 0) {
-                        echo "You already have written a review for this museum";
+                        session_start();
+                        $_SESSION['message'] = 'You have already reviewed this museum';
+                        header("Location: ../museum.php?id=" . $id);
                     } else {
                         // Save the review
                         $sql = "
@@ -65,7 +69,9 @@
                             VALUES(" . $id . ", " . myUserId() . ", '" . $comment . "', " . $rating . ");";
                         $result = mysqli_query($conn, $sql);
                         if ($result) {
-                            echo "Wrote a review";
+                            session_start();
+                            $_SESSION['message'] = 'Wrote a review';
+                            header("Location: ../reviews.php");
                         } else {
                             echo "Failed query<br>" . mysqli_error($conn);
                         }

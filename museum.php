@@ -1,6 +1,17 @@
 <html>
-    <body>
+    <body onload="bodyLoaded()">
         <?php
+            session_start();
+            if (isset($_SESSION['message'])) {
+                $message = $_SESSION['message'];
+                echo "
+                    <script type='text/javascript'>
+                        function bodyLoaded() {
+                            alert('$message');
+                        }
+                    </script>";
+                unset($_SESSION['message']);
+            }
             require_once(__DIR__ . '/gui/museums.php');
             require_once(__DIR__ . '/api/tickets.php');
             require_once(__DIR__ . '/crud/user.php');
