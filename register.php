@@ -1,5 +1,10 @@
 <?php
     session_start();
+    $message = '';
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
 ?>
 <html>
     <head>
@@ -24,20 +29,19 @@
                 document.getElementById('registerFormSubmit').disabled = !canSubmit;
             }
         </script>
-    </head>
-    <body onload="bodyLoaded()">
         <?php
-            if (isset($_SESSION['message'])) {
-                $message = $_SESSION['message'];
-                echo "
-                    <script type='text/javascript'>
-                        function bodyLoaded() {
+            echo "
+                <script type='text/javascript'>
+                    function bodyLoaded() {
+                        if ('$message') {
                             alert('$message');
                         }
-                    </script>";
-                unset($_SESSION['message']);
-            }
+                    }
+                </script>
+            ";
         ?>
+    </head>
+    <body onload="bodyLoaded()">
         <form name="registerForm" method="post" action="api/users.php">
             Email: <input type="text" name="email" onkeyup="checkForm()"><br>
             Password: <input type="password" id="pass" name="password" onkeyup="checkForm()"><br>

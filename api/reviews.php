@@ -59,9 +59,19 @@
                 if ($result) {
                     // Already have a review
                     if (mysqli_num_rows($result) > 0) {
-                        session_start();
-                        $_SESSION['message'] = 'You have already reviewed this museum';
-                        header("Location: ../museum.php?id=" . $id);
+                        // Update the review
+                        $sql = "
+                            UPDATE Review
+                            SET comment='" . $comment . "', rating='" . $rating . "'
+                            WHERE id='" . mysqli_fetch_array($result, MYSQLI_ASSOC)['id'] . "';";
+                            $result = mysqli_query($conn, $sql);
+                            if ($result) {
+                                session_start();
+                                $_SESSION['message'] = 'Updated review';
+                                header("Location: ../reviews.php");
+                            } else {
+                                echo "Failed query<br>" . mysqli_error($conn);
+                            }
                     } else {
                         // Save the review
                         $sql = "

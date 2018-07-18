@@ -1,21 +1,26 @@
 <?php
     session_start();
+    $message = '';
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
 ?>
 <html>
-    <body onload="bodyLoaded()">
+    <head>
         <?php
-            if (isset($_SESSION['message'])) {
-                $message = $_SESSION['message'];
-                echo "
-                    <script type='text/javascript'>
-                        function bodyLoaded() {
+            echo "
+                <script type='text/javascript'>
+                    function bodyLoaded() {
+                        if ('$message') {
                             alert('$message');
                         }
-                    </script>";
-                unset($_SESSION['message']);
-            }
+                    }
+                </script>
+            ";
         ?>
-
+    </head>
+    <body onload="bodyLoaded()">
         <?php
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
