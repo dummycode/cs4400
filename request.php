@@ -5,5 +5,8 @@
 
             echo requestForm();
         ?>
+        <form action="manage.php">
+            <input type="submit" value="Back"/>
+        </form>
     </body>
 </html>

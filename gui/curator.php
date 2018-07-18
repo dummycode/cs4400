@@ -14,7 +14,7 @@
 
         return <<<HTML
             <form action="api/curator.php" method="post">
-                <select name="museum_id">
+                <select name="museum_id" onchange="formCheck()">
                     $options
                 </select><br>
                 <input type="hidden" name="action" value="request">

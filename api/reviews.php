@@ -23,7 +23,7 @@
                 . ($museum_id ? " AND museum_id='" . $museum_id . "'" : "");
 
             $sql = "SELECT *
-                    FROM Review
+                    FROM (Review LEFT JOIN Museum ON Review.museum_id = Museum.id)
                     WHERE " . $where;
 
             $result = mysqli_query($conn, $sql);
