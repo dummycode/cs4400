@@ -30,7 +30,7 @@
         foreach($reviews as $review) {
             echo "
                 <tr>
-                    <td>" . $review['name'] . "</td>
+                    <td><a href=\"./museum.php?id=" . $review['museum_id'] . "\">" . $review['name'] . "</a></td>
                     <td>" . $review['comment'] . "</td>
                     <td>" . $review['rating'] . "/5</td>
                 </tr>
