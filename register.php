@@ -22,7 +22,20 @@
             }
         </script>
     </head>
-    <body>
+    <body onload="bodyLoaded()">
+        <?php
+            session_start();
+            if (isset($_SESSION['message'])) {
+                $message = $_SESSION['message'];
+                echo "
+                    <script type='text/javascript'>
+                        function bodyLoaded() {
+                            alert('$message');
+                        }
+                    </script>";
+                unset($_SESSION['message']);
+            }
+        ?>
         <form name="registerForm" method="post" action="api/users.php">
             Email: <input type="text" name="email" onkeyup="checkForm()"><br>
             Password: <input type="password" id="pass" name="password" onkeyup="checkForm()"><br>

@@ -61,7 +61,9 @@
             if ($result) {
                 // Already have a ticket
                 if (mysqli_num_rows($result) > 0) {
-                    echo "An account with this email already exists";
+                    session_start();
+                    $_SESSION['message'] = 'An account with this email already exists';
+                    header('Location: ../register.php');
                 } else {
                     $sql = "
                         INSERT INTO Visitor (id, email, password, card_number, exp_month, exp_year, security_number)
