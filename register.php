@@ -42,8 +42,8 @@
             Email: <input type="text" name="email" onkeyup="checkForm()"><br>
             Password: <input type="password" id="pass" name="password" onkeyup="checkForm()"><br>
             Confirm Password: <input type="password" id="pass2" onkeyup="checkForm()"><br>
-            Credit Card Number: <input type="text" name="card_number" onkeyup="checkForm()"><br>
-            Credit Card Exp. Month:
+            CC Number: <input type="text" name="card_number" onkeyup="checkForm()"><br>
+            CC Exp. Month:
             <select name="exp_month" id="exp_month" onchange="checkForm()">
                 <option value=''>Month</option>
                 <option value='01'>01</option>
@@ -60,7 +60,7 @@
                 <option value='12'>12</option>
             </select>
             <br>
-            Credit Card Exp. Year:
+            CC Exp. Year:
             <select name="exp_year" id="exp_year" onchange="checkForm()">
                 <option value=''>Year</option>
                 <option value='2018'>2018</option>
@@ -69,7 +69,7 @@
                 <option value='2021'>2021</option>
             </select>
             <br>
-            Credit Card Security Code: <input type="text" name="security_number" maxlength="4" onkeyup="checkForm()"><br>
+            CC Security Code: <input type="text" name="security_number" maxlength="4" onkeyup="checkForm()"><br>
 
             <input type="hidden" name="action" value="create">
             <input type="submit" id="registerFormSubmit" value="Submit" disabled="disabled"><br>
