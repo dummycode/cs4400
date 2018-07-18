@@ -1,7 +1,9 @@
+<?php
+    session_start();
+?>
 <html>
     <body onload="bodyLoaded()">
         <?php
-            session_start();
             if (isset($_SESSION['message'])) {
                 $message = $_SESSION['message'];
                 echo "
@@ -12,7 +14,7 @@
                     </script>";
                 unset($_SESSION['message']);
             }
-            
+
             require_once(__DIR__ . '/gui/curator.php');
 
             echo requestForm();

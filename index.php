@@ -1,10 +1,12 @@
+<?php
+    session_start();
+?>
 <html>
     <head>
         <?php require_once(__DIR__ . '/gui/style.php'); ?>
     </head>
     <body onload="bodyLoaded()">
         <?php
-            session_start();
             if (isset($_SESSION['message'])) {
                 $message = $_SESSION['message'];
                 echo "
@@ -15,7 +17,7 @@
                     </script>";
                 unset($_SESSION['message']);
             }
-            
+
             require_once(__DIR__ . '/crud/user.php');
             require_once(__DIR__ . '/api/museums.php');
             require_once(__DIR__ . '/gui/museums.php');
