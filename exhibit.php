@@ -20,7 +20,7 @@
                 </script>";
             ?>
     </head>
-    <body>
+    <body onload="bodyLoaded()">
         <?php
             require_once(__DIR__ . '/gui/exhibits.php');
             require_once(__DIR__ . '/api/exhibits.php');
