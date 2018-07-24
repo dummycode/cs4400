@@ -3,7 +3,7 @@
         require_once(__DIR__ . '/../api/reviews.php');
         require_once(__DIR__ . '/../crud/user.php');
         // TODO populate form with old data
-        $museum = getReviews(myUserId(), $id)[0];
+        $museum = getReviews(myUserId(), $id)[0] ?? null;
         $rating = $museum['rating'] ?? 1;
         $comment = $museum['comment'] ?? '';
         echo '
