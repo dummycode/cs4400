@@ -64,14 +64,21 @@
             echo "Error connecting to database<br>";
         } else {
             $sql = "
-                SELECT m.id, m.name, m.curator_id, AVG(Rating) AS avg_rating, exhibit_count
+                SELECT m.id, m.name, m.curator_id, AVG(Rating) AS avg_rating, m.exhibit_count
                 FROM (
-                (
-                    SELECT Museum.id, Museum.name, Museum.curator_id, COUNT(*) AS exhibit_count
-                    FROM Museum LEFT OUTER JOIN Exhibit ON Museum.id = Exhibit.museum_id
-                    GROUP BY Museum.id
-                ) AS m
-                LEFT OUTER JOIN Review ON m.id = Review.museum_id)
+                    (
+                        SELECT Museum.id, Museum.name, Museum.curator_id, e.exhibit_count
+                        FROM (
+                            Museum LEFT OUTER JOIN (
+                                (
+                                    SELECT Museum.id, COUNT(*) as exhibit_count
+                                    FROM (Museum JOIN Exhibit ON Museum.id = Exhibit.museum_id)
+                                    GROUP BY Museum.id
+                                ) AS e
+                            ) ON Museum.id = e.id
+                        )
+                    ) AS m
+                LEFT OUTER JOIN Review ON m.id = Review.museum_id )
                 WHERE curator_id='" . $id . "'
                 GROUP BY m.id;
             ";
